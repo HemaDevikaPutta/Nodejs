@@ -3,10 +3,10 @@ name: Node.js CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -19,10 +19,16 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 18 # Ensure this matches the version you use locally
+        node-version: 18 # Match your local Node.js version
 
     - name: Install dependencies
       run: npm install
 
+    - name: Debug Jest Permissions
+      run: ls -l ./node_modules/.bin/
+
+    - name: Grant execute permissions to Jest
+      run: chmod +x ./node_modules/.bin/jest
+
     - name: Run tests
-      run: npm test
+      run: npx jest
