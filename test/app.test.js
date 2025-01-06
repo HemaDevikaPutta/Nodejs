@@ -6,4 +6,14 @@ describe('App Routes', () => {
     const response = await request(app).get('/');
     expect(response.statusCode).toBe(200);
   });
+
+  test('GET /users should respond with a status code 200', async () => {
+    const response = await request(app).get('/users');
+    expect(response.statusCode).toBe(200);
+  });
+
+  test('GET /nonexistent should respond with a status code 404', async () => {
+    const response = await request(app).get('/nonexistent');
+    expect(response.statusCode).toBe(404);
+  });
 });
